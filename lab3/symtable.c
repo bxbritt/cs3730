@@ -16,13 +16,13 @@
 
 struct SymbTab
 {
-    //char label[10],symbol[10]; //10 CHARACTERS MAX
+    //char label[10],symbol[10];
     //int addr;
     //struct SymbTab *next;
     
-    char * symbol;
-    int addr;
-    struct SymbTab *next;
+    char * symbol; //IDENTIFIER OF ELEMENTS
+    int addr; //INTEGER ADDRESS OF ELEMENTS
+    struct SymbTab *next; //SYMBOL TABLE LINKED LIST POINTER
     };
 
 struct SymbTab *first,*last; //reference variables for start and end of list
@@ -30,7 +30,7 @@ struct SymbTab *first,*last; //reference variables for start and end of list
 
 void main() //on run
 {
-    int op,value;
+    int op,value; //OP == OPTION SELECTED, VALUE == ADDRESS OF SYMBOL (REFERENCE)
     char la[10];
     do
     {
@@ -46,7 +46,7 @@ void main() //on run
                 printf("\n\tEnter the symbol : ");
                 scanf("%s",la);
                 printf("\n\tEnter the address : ");
-                scanf("%d",&value);
+                scanf("%d",&value); //&value is used to get the address input
                 Insert(la, value);
                 break;
             case 2: //If 2 is selected, call display function
@@ -82,9 +82,9 @@ void main() //on run
 //strcpy(p->label,l);
 struct SymbTab * Insert(char * symbol, int address) //adds element to list , increases size and based on symbol input
 {
-    int n;
-    char l[10];
-    n = Search(l);
+    int n; //n is used to check if symbol already exists (1 for match, 0 for none)
+    char l[10]; //l is used to store the symbol input
+    n = Search(l); //search for SYMBOL in LIST
 
     if(n == 1)
         printf("\n\tThe label exists already in the symbol table\n\tDuplicate can.t be inserted");
@@ -95,15 +95,15 @@ struct SymbTab * Insert(char * symbol, int address) //adds element to list , inc
         p->symbol = strdup(symbol);
         p->addr = address;
         p->next=NULL;
-        if(size==0)
+        if(size==0) //if size is 0, first and last point to next 
         {
             first=p;
             last=p;
         }
         else
         {
-            last->next=p;
-            last=p;
+            last->next=p; //if size is not 0, last points to next
+            last=p; //last now points to the new element
         }
     size++; //increase size of list
     }
@@ -232,12 +232,12 @@ void Delete(char * s) //Removes element from list, reduces size, based on symbol
     printf("\n\tSymbol not found\n");
     else
     {
-        if(strcmp(first->symbol,s)==0) //searches list for symbol to delete
+        if(strcmp(first->symbol,s)==0) //if first symbol matches s, first is moved to next
         first=first->next;
-        else if(strcmp(last->symbol,s)==0)
+        else if(strcmp(last->symbol,s)==0) // if last symbol matches s, last is moved to previous
         {
             q=p->next;
-            while(strcmp(q->symbol,s)!=0)
+            while(strcmp(q->symbol,s)!=0) //while loop goes through list until it finds the symbol
             {
                 p=p->next;
                 q=q->next;
@@ -248,7 +248,7 @@ void Delete(char * s) //Removes element from list, reduces size, based on symbol
         else
         {
             q=p->next;
-            while(strcmp(q->symbol,s)!=0)
+            while(strcmp(q->symbol,s)!=0) 
             {
                 p=p->next;
                 q=q->next;
