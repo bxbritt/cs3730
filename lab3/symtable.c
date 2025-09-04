@@ -50,7 +50,7 @@ void main() //on run
                 printf("\n\tEnter the symbol : ");
                 scanf("%s",la);
                 printf("\n\tEnter the address : ");
-                scanf("%d",value);
+                scanf("%d",&value);
                 Insert(la, value);
                 break;
             case 2: //If 2 is selected, call display function
@@ -59,7 +59,7 @@ void main() //on run
             case 3: //if 3 is selected, call delete function
                 printf("\n\tEnter the symbol to be deleted : ");
                 scanf("%s",la);
-                value =Search(la);
+                value = Search(la);
                 Delete(la);
                 break;
             case 4: //if 4 is selected, call search function
@@ -119,11 +119,11 @@ void Display()
 {
     int i;
     struct SymbTab *p;
-    p=first;
+    p = first;
     printf("\n\tSYMBOL\t\tADDRESS\n");
     for(i=0;i<size;i++)
     {
-        printf("\t%s\t\t%s\t\t%d\n",p->symbol,p->addr);
+        printf("\t%s\t\t%d\n",p->symbol,p->addr);
         p=p->next;
     }
 }
