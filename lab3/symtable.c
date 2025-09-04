@@ -3,19 +3,15 @@
 #include<malloc.h>
 #include<string.h>
 #include<stdlib.h>
+#include"symtable.h"
 
 /*
     CS3730 Compilers
     Brittany Benedict 
     Lab 3 - Symbol table using a linked list, ability to insert, delete, search, and display
-    Sept 3, 2025
+    Sept 4, 2025
 */ 
 
-int size = 0; //size will change on insertion or delete
-struct SymbTab * Insert(char * sym, int address); //adds to list, increases size
-void Display(); //prints element
-void Delete(); //removes element from list, reduces size
-int Search(char lab[]);   //void Modify(); // TO BE REMOVED 'MODIFY ELEMENT'
 
 
 struct SymbTab
@@ -112,7 +108,7 @@ struct SymbTab * Insert(char * symbol, int address) //adds element to list , inc
     size++; //increase size of list
     }
     
-   //printf("\n\tLabel inserted\n");
+   printf("\n\tSymbol inserted\n");
 }
 
 void Display() //displays all elements in linked list. (SYMBOLS AND ADDRESSES)
