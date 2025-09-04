@@ -84,7 +84,7 @@ void main() //on run
 }  /* END of MAIN */
 
 //strcpy(p->label,l);
-struct SymbTab * Insert(char * symbol, int address) //IMPLEMENTATION OF ADDING ELEMENT TO LINKED LIST (INSERT FUNCTION)
+struct SymbTab * Insert(char * symbol, int address) //adds element to list , increases size and based on symbol input
 {
     int n;
     char l[10];
@@ -109,19 +109,19 @@ struct SymbTab * Insert(char * symbol, int address) //IMPLEMENTATION OF ADDING E
             last->next=p;
             last=p;
         }
-    size++;
+    size++; //increase size of list
     }
     
-    printf("\n\tLabel inserted\n");
+   //printf("\n\tLabel inserted\n");
 }
 
-void Display()
+void Display() //displays all elements in linked list. (SYMBOLS AND ADDRESSES)
 {
     int i;
     struct SymbTab *p;
     p = first;
     printf("\n\tSYMBOL\t\tADDRESS\n");
-    for(i=0;i<size;i++)
+    for(i=0;i<size;i++) //goes through list and prints each element
     {
         printf("\t%s\t\t%d\n",p->symbol,p->addr);
         p=p->next;
@@ -129,7 +129,7 @@ void Display()
 }
 
 
-int Search(char *s) 
+int Search(char *s) //Searches linked list for element (BASED ON SYMBOL)
 {
     int i,flag=0;
     struct SymbTab *p;
@@ -225,7 +225,7 @@ int Search(char *s)
 // }
 
 
-void Delete(char * s)
+void Delete(char * s) //Removes element from list, reduces size, based on symbol input
 {
     int a;
     char l[10];
@@ -236,7 +236,7 @@ void Delete(char * s)
     printf("\n\tSymbol not found\n");
     else
     {
-        if(strcmp(first->symbol,s)==0)
+        if(strcmp(first->symbol,s)==0) //searches list for symbol to delete
         first=first->next;
         else if(strcmp(last->symbol,s)==0)
         {
@@ -259,8 +259,8 @@ void Delete(char * s)
             }
             p->next=q->next;
         }
-        size--;
-        printf("\n\tAfter Deletion:\n");
+        size--; //decreases size of list
+        printf("\n\tAfter Deletion:\n"); ///displays list after deletion
         Display();
     }
 }
