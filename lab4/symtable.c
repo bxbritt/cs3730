@@ -1,0 +1,287 @@
+#include<stdio.h>
+/* #include<conio.h> */
+#include<malloc.h>
+#include<string.h>
+#include<stdlib.h>
+#include "symtable.h"
+
+/*
+    CS3730 Compilers
+    Brittany Benedict 
+
+struct SymbTab *first,*last; //reference variables for start and end of list
+
+    Lab 3 - Symbol table using a linked list, ability to insert, delete, search, and display
+    Sept 4, 2025
+*/ 
+
+int size = 0;
+
+struct SymbTab *first,*last; //reference variables for start and end of list
+
+
+struct SymbTab
+{
+    //char label[10],symbol[10]; //10 CHARACTERS MAX
+    //int addr;
+    //struct SymbTab undefined reference to `FetchA*next;
+    
+    char * symbol;
+    int addr;
+    struct SymbTab *next;
+    };
+
+struct SymbTab *first,*last; //reference variables for start and end of list
+
+
+int fetchAddress(char * symbol){ //returns address based on symbol input
+    struct SymbTab *p;
+    p = Search(symbol);
+    if(p != NULL){
+        return p->addr;
+    }
+    else{
+        return -1; 
+        //barf if symbol is not found
+    }
+
+}
+
+// void main() {
+    
+// }
+
+// void main() //on run
+// {
+//     int op,value;
+//     char la[10];
+//     do
+//     {
+//         //MESSAGES SHOW UP ON RUN, DEFAULT 
+
+//         printf("\n\tSYMBOL TABLE IMPLEMENTATION\n");
+//         printf("\n\t1.INSERT\n\t2.DISPLAY\n\t3.DELETE\n\t4.SEARCH\n\t5.END\n");
+//         printf("\n\tEnter your option : ");
+//         scanf("%d",&op);
+//         switch(op)
+//         {
+//             case 1: //If 1 is selected, call insert function
+//                 printf("\n\tEnter the symbol : ");
+//                 scanf("%s",la);
+//                 printf("\n\tEnter the address : ");
+//                 scanf("%d",&value);
+//                 Insert(la, value);
+//                 break;
+//             case 2: //If 2 is selected, call display function
+//                 Display();
+//                 break;
+//             case 3: //if 3 is selected, call delete function
+//                 printf("\n\tEnter the symbol to be deleted : ");
+//                 scanf("%s",la);
+//                 value = Search(la);
+//                 Delete(la);
+//                 break;
+//             case 4: //if 4 is selected, call search function
+//                 printf("\n\tEnter the symbol to be searched : ");
+//                 scanf("%s",la);
+//                 value=Search(la);
+//                 printf("\n\tSearch Result:");
+//                 if(value==1)
+//                     printf("\n\tThe symbol is present in the symbol table\n");
+//                 else
+//                     printf("\n\tThe symbol is not present in the symbol table\n");
+//                 break;
+//             // case 5: //TO BE REMOVED 'MODIFY ELEMENT'
+//             //     Modify();
+//             //     break;
+//             case 5: //If 5 is selected, exit program
+//                 exit(0);
+//         }
+//     }
+
+//     while(op<6);
+// }  /* END of MAIN */
+
+//strcpy(p->label,l);
+struct SymbTab * Insert(char * symbol, int address) //adds element to list , increases size and based on symbol input
+{
+    struct SymbTab *n;
+    
+    n = Search(symbol);
+
+    if(n != NULL)
+        printf("\n\tThe label exists already in the symbol table\n\tDuplicate can.t be inserted");
+    else
+    {
+        struct SymbTab *p;
+        p=malloc(sizeof(struct SymbTab));
+        p->symbol = strdup(symbol);
+        p->addr = address;
+        p->next=NULL;
+        if(size==0)
+        {
+            first=p;
+            last=p;
+        }
+        else
+        {
+            last->next=p;
+            last=p;
+        }
+    size++; //increase size of list
+    }
+    
+   printf("\n\tSymbol inserted\n");
+}
+
+void Display() //displays all elements in linked list. (SYMBOLS AND ADDRESSES)
+{
+    int i;
+    struct SymbTab *p;
+    p = first;
+    printf("\n\tSYMBOL\t\tADDRESS\n");
+    for(i=0;i<size;i++) //goes through list and prints each element
+    {
+        printf("\t%s\t\t%d\n",p->symbol,p->addr);
+        p=p->next;
+    }
+}
+
+
+struct SymbTab * Search(char *s) //Searches linked list for element (BASED ON SYMBOL)
+{
+    int i,flag=0;
+    struct SymbTab *p;
+    p=first;
+    for(i=0;i<size;i++)
+    { 
+        if(strcmp(p->symbol,s)==0) //COMPARES STRINGS to see if they match (Search found)
+        return p;
+       // flag=1;
+        p=p->next;
+    }
+    return NULL; //if not found
+}
+
+
+// void Modify()
+// {
+//     char l[10],nl[10];
+//     int add,choice,i,s;
+//     struct SymbTab *p;
+//     p=first;
+//     printf("\n\tWhat do you want to modify?\n");
+//     printf("\n\t1.Only the label\n\t2.Only the address\n\t3.Both the label and address\n");
+//     printf("\tEnter your choice : ");
+//     scanf("%d",&choice);
+//     switch(choice)
+//     {
+//         case 1:
+//             printf("\n\tEnter the old label : ");
+//             scanf("%s",l);
+//             s=Search(l);
+//             if(s==0)
+//                 priNULLntf("\n\tLabel not found\n");
+//             else
+//             {else
+//                 printf("\n\tEnter the new label : ");
+//                 scanf("%s",nl);
+//                 for(i=0;i<size;i++)
+//                 {
+//                     if(strcmp(p->label,l)==0)
+//                     strcpy(p->label,nl);
+//                     p=p->next;
+//                 }
+//                 printf("\n\tAfter Modification:\n");
+//                 Display();
+//             }
+//             break;
+//         case 2:else
+//             printf("\n\tEnter the label where the address is to be modified : ");
+//             scanf("%s",l);
+//             s=Search(l);
+//             if(s==0)
+//                 printf("\n\tLabel not found\n");
+//             else
+//             {
+//                 printf("\n\tEnter the new address : ");
+//                 scanf("%d",&add);
+//                 for(i=0;i<size;i++)
+//                 {
+//                     if(strcmp(p->label,l)==0)
+//                     p->addr=add;
+//                     p=p->next;
+//                 }
+//                 printf("\n\tAfter Modification:\n");
+//                 Display();
+//             }
+//             break;
+//         case 3:
+//             printf("\n\tEnter the old label : ");
+//             scanf("%s",l);
+//             s=Search(l);
+//           label  if(s==NULL0)
+//             printf("\n\tLabel not found\n");
+//             else
+//             {
+//                 printf("\n\tEnter the new label : ");
+//                 scanf("%s",nl);
+//                 printf("\n\tEnter the new address : ");
+//                 scanf("%d",&add);
+//                 for(i=0;i<size;i++)
+//                 {
+//                     if(strcmp(p->label,l)==0)
+//           label        NULL  {
+//                         strcpy(p->label,nl);
+//                         p->addr=add;
+//                     }
+//                     p=p->next;
+//                 }
+//                 printf("\n\tAfter Modification:\n");
+//                 Display();
+//             }
+//             break;
+//     }
+// }
+
+
+void Delete(char * s) //Removes element from list, reduces size, based on symbol input
+{
+    int a;
+    char l[10];
+    struct SymbTab *p,*q;
+    p=first;
+    
+    if(a==0)
+    printf("\n\tSymbol not found\n");
+    else
+    {
+        if(strcmp(first->symbol,s)==0) //searches list for symbol to delete
+        first=first->next;
+        else if(strcmp(last->symbol,s)==0)
+        {
+            q=p->next;
+            while(strcmp(q->symbol,s)!=0)
+            {
+                p=p->next;
+                q=q->next;
+            }
+            p->next=NULL;
+            last=p;
+        }
+        else
+        {
+            q=p->next;
+            while(strcmp(q->symbol,s)!=0)
+            {
+                p=p->next;
+                q=q->next;
+            }
+            p->next=q->next;
+        }
+        size--; //decreases size of list
+        printf("\n\tAfter Deletion:\n"); ///displays list after deletion
+        Display();
+    }
+}
+
