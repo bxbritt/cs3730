@@ -1,0 +1,63 @@
+15 questions.  timed test.  No notes 
+
+ 
+
+Understand all labs  
+
+ 
+
+Understand how Search() and FetchAddress() work 
+ 
+Chomsky Hierarchy 
+
+     regular  LEX --- lexical analysis.  (tokenization LEX) 
+     context Free -- check for Syntax  (token sequence YACC) 
+     context Sensitive 
+     unrestricted 
+
+ 
+Thompson Construction  REG -> NFA 
+
+ 
+Subset Construction NFA -> DFA 
+
+ 
+REG EX puzzle  https://regexcrossword.com/challenges 
+
+ 
+
+Ambiguous vs unambiguous grammars  
+
+    See Ambiguous subpage 
+
+     Ambiguous -- there is at least one valid sentence that has  at least two or more parses (interpertations ). 
+
+ 
+LAB4   Steps to make LEX and YACC hand shake 
+
+     union 
+
+What we did for VARIABLE 
+What was done to deal with new line 
+
+       YACC   
+
+             extern int lineno; 
+
+      LEX 
+            int lineno =1; 
+
+ 
+
+      \n   { lineno++;} 
+
+ 
+
+ 
+
+Know LAB4 and Lab 3 well.  Know all labs. 
+Linked Lists --how to count element in a list, how to add up the data payload in a list.  how to duplicate a list. 
+
+ 
+How YACC and LEX relate to Chomsky Hierarchy> 
+How YACC and LEX interoperate 

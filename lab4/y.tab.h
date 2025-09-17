@@ -57,9 +57,7 @@ extern int yydebug;
     INTEGER = 258,                 /* INTEGER  */
     VARIABLE = 259,                /* VARIABLE  */
     T_INT = 260,                   /* T_INT  */
-    UMINUS = 261,                  /* UMINUS  */
-    YY_PARSE_program = 262,        /* YY_PARSE_program  */
-    YY_PARSE_list = 263            /* YY_PARSE_list  */
+    UMINUS = 261                   /* UMINUS  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -72,19 +70,18 @@ extern int yydebug;
 #define VARIABLE 259
 #define T_INT 260
 #define UMINUS 261
-#define YY_PARSE_program 262
-#define YY_PARSE_list 263
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 56 "lab4.y"
+#line 58 "lab4.y"
 
 	int value;
 	char* string;
 
-#line 88 "y.tab.h"
+
+#line 85 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -97,26 +94,6 @@ extern YYSTYPE yylval;
 
 
 int yyparse (void);
-
-// Return type when parsing one list.
-typedef struct
-{
-  int yystatus;
-  int yynerrs;
-} yyparse_list_t;
-
-// Parse one list.
-yyparse_list_t yyparse_list (void);
-
-// Return type when parsing one program.
-typedef struct
-{
-  int yystatus;
-  int yynerrs;
-} yyparse_program_t;
-
-// Parse one program.
-yyparse_program_t yyparse_program (void);
 
 
 #endif /* !YY_YY_Y_TAB_H_INCLUDED  */

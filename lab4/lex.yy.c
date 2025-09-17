@@ -392,7 +392,7 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    2,    1,    1,    1,    1,    4,    4,    1,    4,
         4,    4,    4,    1,    4,    1,    4,    5,    5,    5,
-        5,    5,    5,    5,    5,    5,    5,    1,    1,    1,
+        5,    5,    5,    5,    5,    5,    5,    1,    4,    1,
         4,    1,    1,    1,    6,    6,    6,    6,    6,    6,
         6,    6,    6,    6,    6,    6,    6,    6,    6,    6,
         6,    6,    6,    6,    6,    6,    6,    6,    6,    6,
@@ -483,7 +483,7 @@ char *yytext_ptr;
                     January 2015
 */
 #line 11 "lab4.l"
-int mydebug=1;
+int mydebug=0;
 #include "y.tab.h"
 #include "symtable.h"
 #line 489 "lex.yy.c"
