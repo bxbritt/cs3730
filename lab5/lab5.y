@@ -1,30 +1,25 @@
 /*
 Brittany Benedict
-September 17, 2025
+September 24, 2025
 Lab 5 - CS3730
 */
 
 %{
 
 
-/*
+#include <stdio.h>
 
-  					Brittany Benedict
-                    CS3730
-
-*/
-
-
+extern int yylex();
 extern int mydebug;
 extern int linecount;
 
 int regs[26];
-int base, dlex, lab5,lebugsw;
+int base, dlex, lab5,debugsw;
 
 void yyerror (s)  /* Called by yyparse on error */
      char *s;
 {
-  printf ("%s\n", s);
+  printf ("%s at line %d\n", s, linecount);
 }
 
 
@@ -35,39 +30,36 @@ void yyerror (s)  /* Called by yyparse on error */
 
 %start Program
 
-
+/*  defines the precedence and associativity of operators  */
 %union{
 	int value;
 	char* string;
 
 }
+/*  defines the type of the values returned from LEX and used in the grammar  */
 
-//check this
+%token <string> T_ID T_STRING
+%token <value> T_NUM
 
-
-%token  T_BOOLEAN T_ID T_INT T_NUM T_READ T_RETURN T_STRING T_VOID T_WRITE
+%token  T_BOOLEAN T_INT T_READ T_RETURN  T_VOID T_WRITE
 %token  T_BEGIN T_END T_AND T_OR T_TRUE T_FALSE T_NOT
 %token  T_EQ T_GE T_GT T_LE T_LT T_NE
+%token  T_IF T_ELSE T_WHILE T_ENDIF T_DO T_THEN
 
 
-
-%left '|'
-%left '&'
-%left '+' '-''(' ')'
-%left '*' '/' '%'
-%left UMINUS
 
 
 
 %%	/* end specs, begin rules */
 
-Program : Declaration_List
-		;
+/*  the grammar rules  */
 
+Program : Declaration_List
+	;
 
 
 Declaration_List    : Declaration
-                    | Declaration Declaration_List'[' Expr ']'
+                    | Declaration Declaration_List
                     ;
 
 Declaration : Var_Declaration
@@ -77,9 +69,9 @@ Declaration : Var_Declaration
 Var_Declaration : Type_Specifier Var_List ';'
                 ;
 
-Var_List    : T_ID
-            | T_ID '['T_NUM']'
-            | T_ID ',' Var_List
+Var_List    : T_ID {printf("Found ID in Var_List -> T_ID %s %d\n", $1, linecount);}
+            | T_ID '['T_NUM']' {printf("Found ID in Var_List -> T_ID %s %d\n", $1, linecount);}
+            | T_ID ',' Var_List {printf("Found ID in Var_List -> T_ID %s %d\n", $1, linecount);}
             | T_ID '['T_NUM']' ',' Var_List
             ;
 
@@ -103,7 +95,6 @@ Param   : Type_Specifier T_ID
         ;
 
 Compound_Stmt   : T_BEGIN Local_Declarations Statement_List T_END
-                |
                 ;
 
 Local_Declarations  : Var_Declaration Local_Declarations
@@ -114,19 +105,43 @@ Statement_List  : Statement Statement_List
                 | /*empty*/
                 ;
 
-Statement   : Write_Stmt
+Statement   : Expression_Stmt
+            | Compound_Stmt
+            | Selection_Stmt
+            | Iteration_Stmt
+            | Assignment_Stmt
+            | Return_Stmt
             | Read_Stmt
+            | Write_Stmt
             ;
 
-Write_Stmt  : T_WRITE T_STRING
-            | /**/
+Expression_Stmt : Expr ';'
+                | ';'
+                ;
+
+Selection_Stmt  : T_IF  Expr T_THEN Statement T_ENDIF
+                | T_IF  Expr T_THEN Statement T_ELSE Statement T_ENDIF
+                ;
+
+Iteration_Stmt  : T_WHILE Expr T_DO Statement
+                ;
+
+Assignment_Stmt : VARIABLE '=' Expr ';'
+                ;
+
+Return_Stmt : T_RETURN Expr ';'
+            | T_RETURN ';'
             ;
 
-Read_Stmt   : T_READ VARIABLE
+Write_Stmt  : T_WRITE Expr ';'
+            | T_WRITE T_STRING ';'
             ;
+
+Read_Stmt   : T_READ VARIABLE ';'
             ;
+
 VARIABLE    : T_ID 
-            | T_ID Expr
+            | T_ID '[' Expr ']'
             ;
 
 Expr    : Simple_Expression
@@ -153,21 +168,34 @@ Add_Op  : '+'
         ;
 
 Term    : Term Mult_Op Factor
-        |Factor
+        | Factor 
         ;
 
 Mult_Op : '*'
-        | '\\'
+        | '/'
         |T_AND
         |T_OR
         ;
 
-Factor  : '('Expr')'
+Factor  : '(' Expr ')'
         | T_NUM
         | VARIABLE
+        | Call
+        | T_FALSE
         | T_TRUE
         | T_NOT Factor
         ;
+
+Call    : T_ID '(' Args ')'
+        ;
+
+Args    : Arg_list
+        | /*empty*/
+        ;
+
+Arg_list        : Expr ',' Arg_list
+                | Expr
+                ;
 
 
 /* //7. factor → ( expression ) | NUM | var | call | true | false | not factor
