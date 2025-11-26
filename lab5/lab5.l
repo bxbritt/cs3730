@@ -5,7 +5,7 @@
 
 int mydebug=0; // set to 1 to get debug output
 int linecount=1; //
-#include "y.tab.h"
+#include "lab5.tab.h"
 %}
 
 

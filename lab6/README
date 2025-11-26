@@ -1,0 +1,9 @@
+## RUNNING LAB6.EXE
+
+    ./lab# < test.al 
+
+## COMPILING FILES
+    make
+
+## TO RECOMPILE
+    make clean && make 

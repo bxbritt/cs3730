@@ -64,9 +64,9 @@ void main() //on run
                 value=Search(la);
                 printf("\n\tSearch Result:");
                 if(value==1)
-                    printf("\n\tThe symbol is present in the symbol table\n");
+                    printf("\n\tThe symbol is present in the symbol table.\n");
                 else
-                    printf("\n\tThe symbol is not present in the symbol table\n");
+                    printf("\n\tThe symbol is not present in the symbol table.\n");
                 break;
             // case 5: //TO BE REMOVED 'MODIFY ELEMENT'
             //     Modify();

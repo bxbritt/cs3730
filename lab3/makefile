@@ -14,3 +14,9 @@ lab3:
 		gcc symtable.c -o lab3
 clean: 
 	rm -f lab3
+
+auto:	
+		rm -f lab3
+		gcc symtable.c -o lab3
+		./lab3
+		
