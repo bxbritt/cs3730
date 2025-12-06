@@ -56,6 +56,10 @@ ASTnode *program; // Define the global variable here
     return(p);
 }
 
+
+
+
+
 /*#############################[HELPER PRINT TAB FUNCTION]######################################################### 
 
                             pre:    given a positive number
@@ -191,15 +195,28 @@ void ASTprint(int level,ASTnode *p) // how far down the tree we are and pointer 
             printf("EXPRESSION STATEMENT\n");
             ASTprint(level + 1, p->s1);
             break;
-//-------------------------------[BOOLEAN NODE CASE]--------------------------------------------//
+//-------------------------------[BOOLEAN NODE CASES]--------------------------------------------//
+    
+        case A_TRUE:
+            PT(level);
+            (p->value == 0);
+            printf("BOOLEAN: true (1)\n");
+            break;
+
+        case A_FALSE:
+            PT(level);
+            (p->value == 0);
+            printf("BOOLEAN: false (0)\n");
+            break;
+
         case A_BOOLEAN:
-                    PT(level);
-                    if (p->value) {
-                        printf("BOOLEAN: true\n");
-                    } else {
-                        printf("BOOLEAN: false\n");
-                    }
-                    break;
+            PT(level);
+            if (p->value) {
+                printf("BOOLEAN: true (1)\n");
+            } else {
+                printf("BOOLEAN: false (0)\n");
+            }
+            break;
 //-------------------------------[RETURN NODE CASE]-----------------------------------------------//
         case A_RETURN:  
                     PT(level);
@@ -278,14 +295,14 @@ void ASTprint(int level,ASTnode *p) // how far down the tree we are and pointer 
         case A_WRITE:
                     PT(level);
                     printf("WRITE:");
-                    if(p->name != NULL) //if name is not null then its a string
+                    if(p->name != NULL ) //if name is not null then its a string
                     {
                      ASTprint(level + 1,p->s1);
                     }
                     else
                     {
-                        printf("\n");
-                        ASTprint(level + 1,p->s1); // print expression
+                     printf("\n");
+                     ASTprint(level + 1,p->s1); // print expression
                     }
                     break;
                     
@@ -392,7 +409,7 @@ void ASTprint(int level,ASTnode *p) // how far down the tree we are and pointer 
                  exit(1);
 
 
-       } // of switch
+       } // end of switch cases
 }
 //                                    END OF ASTprint
 

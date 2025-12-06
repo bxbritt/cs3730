@@ -93,12 +93,13 @@ union YYSTYPE
 #line 54 "lab9.y"
 
 	int value;
-	char* string;
-        ASTnode * node;
-        enum DataTypes datatype;
-        enum OPERATORS operator;
 
-#line 102 "lab9.tab.h"
+	char* string;
+  ASTnode * node;
+  enum DataTypes datatype;
+  enum OPERATORS operator;
+
+#line 103 "lab9.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -4,7 +4,8 @@
    //  Lab 9 - CS3730
 
 int mydebug=0; // set to 1 to get debug output
-int linecount=1; //
+int linecount=1; 
+
 
 #include "ast.h"
 #include "lab9.tab.h"
@@ -21,7 +22,7 @@ write       {return(T_WRITE);}
 begin       {return(T_BEGIN);}
 end         {return(T_END);}
 read        {return(T_READ);}
-\".*\"      {yylval.string=strdup(yytext) ;  return(T_STRING);}
+\".*\"      { yylval.string = strdup(yytext); return T_STRING; }
 not         {return(T_NOT);}
 true        {return(T_TRUE);}
 false       {return(T_FALSE);}
@@ -47,11 +48,16 @@ then        {return(T_THEN);}
 
 [a-zA-Z][a-zA-Z0-9_]*		{if (mydebug) fprintf(stderr,"Letter found\n"); 
                        yylval.string = strdup(yytext); return(T_ID);/* return an identifier */ }
+
 [0-9][0-9]*	{if (mydebug) fprintf(stderr,"Digit found\n"); 
                        yylval.value = atoi((const char *)yytext); return(T_NUM);}
+
 [ \t]		{if (mydebug) fprintf(stderr,"Whitespace found\n");/* skip whitespace */ }
+
 [=\-+*/%&|();,[\](\)] 	{ if (mydebug) fprintf(stderr,"return a token %c\n",*yytext); 
                        return (*yytext);/* return a single character token */ }
+
+                       
 \n 		{ if (mydebug) fprintf(stderr,"cariage return %c\n",*yytext); 
                        linecount++;
                     }

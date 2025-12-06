@@ -503,13 +503,14 @@ char *yytext;
    //  Lab 9 - CS3730
 
 int mydebug=0; // set to 1 to get debug output
-int linecount=1; //
+int linecount=1; 
+
 
 #include "ast.h"
 #include "lab9.tab.h"
 
-#line 512 "lex.yy.c"
 #line 513 "lex.yy.c"
+#line 514 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -726,9 +727,9 @@ YY_DECL
 		}
 
 	{
-#line 15 "lab9.l"
+#line 16 "lab9.l"
 
-#line 732 "lex.yy.c"
+#line 733 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -787,176 +788,176 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 16 "lab9.l"
+#line 17 "lab9.l"
 {return(T_INT);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 17 "lab9.l"
+#line 18 "lab9.l"
 {return(T_VOID);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "lab9.l"
+#line 19 "lab9.l"
 {return(T_BOOLEAN);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "lab9.l"
+#line 20 "lab9.l"
 {return(T_RETURN);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "lab9.l"
+#line 21 "lab9.l"
 {return(T_WRITE);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "lab9.l"
+#line 22 "lab9.l"
 {return(T_BEGIN);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 22 "lab9.l"
+#line 23 "lab9.l"
 {return(T_END);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 23 "lab9.l"
+#line 24 "lab9.l"
 {return(T_READ);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 24 "lab9.l"
-{yylval.string=strdup(yytext) ;  return(T_STRING);}
+#line 25 "lab9.l"
+{ yylval.string = strdup(yytext); return T_STRING; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "lab9.l"
+#line 26 "lab9.l"
 {return(T_NOT);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "lab9.l"
+#line 27 "lab9.l"
 {return(T_TRUE);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 27 "lab9.l"
+#line 28 "lab9.l"
 {return(T_FALSE);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 28 "lab9.l"
+#line 29 "lab9.l"
 {return(T_AND);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 29 "lab9.l"
+#line 30 "lab9.l"
 {return(T_OR);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "lab9.l"
+#line 31 "lab9.l"
 {return(T_IF);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 31 "lab9.l"
+#line 32 "lab9.l"
 {return(T_ELSE);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 32 "lab9.l"
+#line 33 "lab9.l"
 {return(T_WHILE);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 33 "lab9.l"
+#line 34 "lab9.l"
 {return(T_ENDIF);}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 34 "lab9.l"
+#line 35 "lab9.l"
 {return(T_DO);}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 35 "lab9.l"
+#line 36 "lab9.l"
 {return(T_THEN);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 36 "lab9.l"
+#line 37 "lab9.l"
 {/* skip comment */} 
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 37 "lab9.l"
+#line 38 "lab9.l"
 {return(T_EQ);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 38 "lab9.l"
+#line 39 "lab9.l"
 {return(T_GE);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 39 "lab9.l"
+#line 40 "lab9.l"
 {return(T_GT);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 40 "lab9.l"
+#line 41 "lab9.l"
 {return(T_LE);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 41 "lab9.l"
+#line 42 "lab9.l"
 {return(T_LT);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 42 "lab9.l"
+#line 43 "lab9.l"
 {return(T_NE);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 48 "lab9.l"
+#line 49 "lab9.l"
 {if (mydebug) fprintf(stderr,"Letter found\n"); 
                        yylval.string = strdup(yytext); return(T_ID);/* return an identifier */ }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 50 "lab9.l"
+#line 52 "lab9.l"
 {if (mydebug) fprintf(stderr,"Digit found\n"); 
                        yylval.value = atoi((const char *)yytext); return(T_NUM);}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 52 "lab9.l"
+#line 55 "lab9.l"
 {if (mydebug) fprintf(stderr,"Whitespace found\n");/* skip whitespace */ }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 53 "lab9.l"
+#line 57 "lab9.l"
 { if (mydebug) fprintf(stderr,"return a token %c\n",*yytext); 
                        return (*yytext);/* return a single character token */ }
 	YY_BREAK
 case 32:
 /* rule 32 can match eol */
 YY_RULE_SETUP
-#line 55 "lab9.l"
+#line 61 "lab9.l"
 { if (mydebug) fprintf(stderr,"cariage return %c\n",*yytext); 
                        linecount++;
                     }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 59 "lab9.l"
+#line 65 "lab9.l"
 ECHO;
 	YY_BREAK
-#line 960 "lex.yy.c"
+#line 961 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1961,7 +1962,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 59 "lab9.l"
+#line 65 "lab9.l"
 
 
 int yywrap(void)

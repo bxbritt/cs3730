@@ -53,10 +53,11 @@ void yyerror (s)  /* Called by yyparse on error */
 /*  defines the precedence and associativity of operators  */
 %union{
 	int value;
+
 	char* string;
-        ASTnode * node;
-        enum DataTypes datatype;
-        enum OPERATORS operator;
+  ASTnode * node;
+  enum DataTypes datatype;
+  enum OPERATORS operator;
 }
 /*  defines the type of the values returned from LEX and used in the grammar  */
 
@@ -277,7 +278,7 @@ Compound_Stmt   : T_BEGIN {LEVEL++;}
                  if(OFFSET > maxoffset){
                   maxoffset = OFFSET;
                  }
-                 Display();
+                 if(mydebug) Display();
                  OFFSET -= Delete(LEVEL);
                  LEVEL--;
                  }
@@ -523,9 +524,10 @@ Factor  : '(' Expr ')'
          $$-> value = $1;
          $$->datatype = A_INTTYPE;
         } 
-        | T_STRING
-        {$$ = ASTCreateNode(A_STRING);
-         $$-> name = $1;}
+        |T_STRING
+        { $$ = ASTCreateNode(A_STRING);
+          $$->name = $1;
+          $$->datatype = A_STRINGTYPE; }
         | VARIABLE
         {$$ = $1;} 
         | CALL
@@ -545,6 +547,7 @@ Factor  : '(' Expr ')'
           $$ -> datatype = $2 -> datatype;
         }
         | T_FALSE
+
         {$$ = ASTCreateNode(A_BOOLEAN);
          $$-> value = 0;
          $$->datatype = A_BOOLEANTYPE;}
@@ -661,7 +664,7 @@ int main(int argc, char * argv[])
   
   EMIT(program,fp);
 
-  //ASTprint(0,program);
+  if (mydebug) ASTprint(0,program);
   exit(0);
 }
 

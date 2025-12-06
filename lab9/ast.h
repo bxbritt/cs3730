@@ -23,26 +23,28 @@ enum ASTtype {
    A_FUNDEC,                            //3
    A_NUMBER,                            //4
    A_EXPR,                              //5
-   A_EXPR_STMT,
-   A_IFSTMT,                            //6
-   A_COMPOUNDSTMT,                      //7
-   A_SELECT,                            //8
-   A_STMT_LIST,                         //9
-   A_WRITE,                             //10
-   A_FACTOR,                            //11
-   A_NUM,                               //12
-   A_VARIABLE,                          //13
-   A_ASSIGNSTMT,                        //14
-   A_IFSTMT_ELSE,                       //15
-   A_ITERATION,                         //16
-   A_RETURN,                            //17
-   A_PARAM_LIST,                        //18
-   A_PARAM,                             //19
-   A_READ,                              //20
-   A_STRING,                            //21
-   A_CALL,                              //22
-   A_ARG_LIST,                           //23
-   A_BOOLEAN                            //24
+   A_EXPR_STMT,                         //6
+   A_IFSTMT,                            //7
+   A_COMPOUNDSTMT,                      //8
+   A_SELECT,                            //9
+   A_STMT_LIST,                         //10
+   A_WRITE,                             //11
+   A_FACTOR,                            //12
+   A_NUM,                               //13
+   A_VARIABLE,                          //14
+   A_ASSIGNSTMT,                        //15
+   A_IFSTMT_ELSE,                       //16
+   A_ITERATION,                         //17
+   A_RETURN,                            //18
+   A_PARAM_LIST,                        //19
+   A_PARAM,                             //20
+   A_READ,                              //21
+   A_STRING,                            //22
+   A_CALL,                              //23
+   A_ARG_LIST,                          //24
+   A_TRUE,                              //25                 
+   A_FALSE,                              //26
+   A_BOOLEAN                            //27                             
 	 
 };
 
@@ -81,8 +83,8 @@ typedef struct ASTnodetype
      enum OPERATORS operator;
      enum DataTypes datatype;
      char * name;
+     char * label;
      int value;
-     ///.. missing
      struct ASTnodetype *s1,*s2 ; /* used for holding IF and WHILE components -- not very descriptive */
      struct SymbTab * symbol; 
 } ASTnode;
@@ -90,6 +92,7 @@ typedef struct ASTnodetype
 
 /* uses malloc to create an ASTnode and passes back the heap address of the newley created node */
 ASTnode *ASTCreateNode(enum ASTtype mytype);
+
 
 void PT(int howmany);
 
@@ -101,4 +104,5 @@ extern ASTnode *program; // pointer to the tree
 /*  Print out the abstract syntax tree */
 void ASTprint(int level,ASTnode *p);
 
-#endif // of AST_H
+// of AST_H
+#endif 
