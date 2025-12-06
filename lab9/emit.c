@@ -392,7 +392,7 @@ void EMIT_FUNDEC(ASTnode *p, FILE *fp)
         }
         else 
         {
-            emit(fp, "" , "jr $ra" , "return to caller");
+            
         }
     }
     

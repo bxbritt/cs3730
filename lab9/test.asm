@@ -63,7 +63,6 @@ f:			# START OF FUNCTION
 
 	lw $ra, ($fp)		# reset return address
 	lw $sp, 4($fp)		# reset SP
-	jr $ra		# return to caller
 main:			# START OF FUNCTION
 
 	subu $a0, $sp, 88		# set up $a0 to be the new spot for the SP
